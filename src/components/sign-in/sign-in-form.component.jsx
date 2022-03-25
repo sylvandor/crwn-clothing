@@ -14,10 +14,7 @@ const defaultFormFields = {
   password: ''
 }
 
-const logGoogleUserPopup = async () => {
-  const {user} = await signInWithGooglePopup();
-  const userDocRef = createUserDocumentFromAuth(user);
-}
+const logGoogleUserPopup = async () => await signInWithGooglePopup();
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -31,8 +28,7 @@ const SignInForm = () => {
   const handleSubmit = async event => {
     event.preventDefault()
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password);
-
+      await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
     } catch ({code, message}) {
       switch (code) {
