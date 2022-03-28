@@ -3,15 +3,21 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
+import {UserProvider} from "./contexts/user/user.context";
+import {ProductsProvider} from "./contexts/products/products.context";
+import {CartProvider} from "./contexts/cart/cart.context";
 
 import './index.scss';
-import {UserProvider} from "./contexts/user/user.context";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App/>
+        <ProductsProvider>
+          <CartProvider>
+            <App/>
+          </CartProvider>
+        </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
