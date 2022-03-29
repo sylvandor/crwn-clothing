@@ -1,13 +1,14 @@
 import Button from "../button/button.component";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {CartContext} from "../../contexts/cart/cart.context";
 import {ProductsContext} from "../../contexts/products/products.context";
 import CartItem from "../cart-item/cart-item.component";
 
 import './cart-dropdown.styles.scss'
+import {Link} from "react-router-dom";
 
 const CartDropdown = () => {
-  const {products: cartProducts} = useContext(CartContext)
+  const {products: cartProducts, closeCart} = useContext(CartContext)
   const {products} = useContext(ProductsContext);
 
   return (
@@ -20,7 +21,7 @@ const CartDropdown = () => {
             )
         }
       </div>
-      <Button>GO TO CHECKOUT</Button>
+      <Link to={'/checkout'}><Button buttonProps={{onClick: closeCart}}>CHECKOUT</Button></Link>
     </div>
   );
 }
