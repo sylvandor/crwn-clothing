@@ -11,7 +11,7 @@ import {CartContext} from "../../contexts/cart/cart.context";
 
 const Navigation = () => {
   const {currentUser} = useContext(UserContext);
-  const {cart} = useContext(CartContext);
+  const {open} = useContext(CartContext);
 
   return (
     <>
@@ -30,7 +30,7 @@ const Navigation = () => {
             <Link className={'nav-link'} to={'/auth'}>SIGN IN</Link>}
         <CartIcon/>
         </div>
-        {cart.open && <CartDropdown/>}
+        {open && <CartDropdown/>}
       </div>
       <Outlet/>
     </>

@@ -21,6 +21,15 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
+
+    .item-container {
+      display: flex;
+      flex-direction: row;
+
+      img {
+        width: px;
+      }
+    }
   }
 
   button {

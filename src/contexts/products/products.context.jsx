@@ -10,7 +10,11 @@ export const ProductsProvider = ({children}) => {
   const [products, setProducts] = useState(null);
   const value = {products, setProducts};
 
-  useEffect(() => setProducts(SHOP_PRODUCTS), [])
+  const productsObj =
+    Object.fromEntries(SHOP_PRODUCTS.map(product =>
+      [product.id, product]))
+
+  useEffect(() => setProducts(productsObj), [])
 
   return (
     <ProductsContext.Provider value={value}>
