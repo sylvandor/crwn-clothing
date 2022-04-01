@@ -4,10 +4,10 @@ import {CartContext} from "../../contexts/cart/cart.context";
 
 import './product-card.styles.scss'
 
-const ProductCard = ({product: {id, name, imageUrl, price}}) => {
+const ProductCard = ({product: {id, name, imageUrl, price}, categoryTitle}) => {
   const {addProduct} = useContext(CartContext);
 
-  const addItem = () => addProduct(id);
+  const addItem = () => addProduct(id, categoryTitle);
 
   return (
     <div className={'product-card-container'}>

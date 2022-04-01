@@ -6,9 +6,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
 } from 'firebase/auth'
-import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore'
+import {doc, getDoc, getFirestore, setDoc, collection, writeBatch, query, getDocs} from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCVBc1jqrBKjSwlYNDKN6WOf8u9izBqob8",
@@ -31,22 +31,22 @@ googleProvider.setCustomParameters({
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
-export const db = getFirestore()
+export const db = getFirestore();
 
 export const createUserDocumentFromAuth = async (userAuth) => {
   if (!userAuth) return;
 
-  const userDocRef = doc(db, 'users', userAuth.uid)
+  const userDocRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const {displayName, email} = userAuth
-    const createdAt = new Date()
+    const {displayName, email} = userAuth;
+    const createdAt = new Date();
 
     try {
-      await setDoc(userDocRef, {displayName, email, createdAt})
+      await setDoc(userDocRef, {displayName, email, createdAt});
     } catch (e) {
-      console.error('Error creating the user', e.message)
+      console.error('Error creating the user', e.message);
     }
 
     return userDocRef;
@@ -56,7 +56,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  return await createUserWithEmailAndPassword(auth, email, password)
+  return await createUserWithEmailAndPassword(auth, email, password);
 }
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
@@ -65,6 +65,29 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export const onAuthStateChangedListener = callback =>  onAuthStateChanged(auth, callback)
+export const onAuthStateChangedListener = callback => onAuthStateChanged(auth, callback);
 
-export const signOutUser = async () => await signOut(auth)
+export const signOutUser = async () => await signOut(auth);
+
+export const addCollectionAndDocuments = async (collectionKey, objects, field) => {
+  const collectionRef = collection(db, collectionKey);
+
+  const batch = writeBatch(db);
+
+  objects.forEach(obj => {
+    const docRef = doc(collectionRef, obj[field].toLowerCase());
+    batch.set(docRef, obj);
+  });
+  await batch.commit();
+}
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.reduce((acc, docSanpshot) => {
+    const {title, items} = docSanpshot.data()
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+}

@@ -3,10 +3,10 @@ import {CartContext} from "../../contexts/cart/cart.context";
 
 import './checkout-item.styles.scss'
 
-const CheckoutItem = ({product: {name, imageUrl, price}, id, count}) => {
+const CheckoutItem = ({product: {name, imageUrl, price}, id, category, count}) => {
   const {addProduct, removeProduct, clearProduct} = useContext(CartContext)
 
-  const add = () => addProduct(id)
+  const add = () => addProduct(id, category)
   const remove = () => removeProduct(id)
   const clear = () => clearProduct(id);
 
