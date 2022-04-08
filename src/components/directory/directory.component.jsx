@@ -1,7 +1,8 @@
-import './directory.styles.scss'
-import CategoryItem from "../category-item/category-item.component";
 import {useContext} from "react";
+import CategoryItem from "../category-item/category-item.component";
 import {CategoriesContext} from "../../contexts/products/categoriesContext";
+
+import {DirectoryContainer} from "./directory.styles";
 
 const CATEGORIES =
   {
@@ -16,10 +17,10 @@ const Directory = () => {
   const {categories} = useContext(CategoriesContext);
 
   return (
-    <div className={'directory-container'}>
+    <DirectoryContainer>
       {Object.keys(categories)
         .map(title => <CategoryItem key={title} category={CATEGORIES[title]}/>)}
-    </div>
+    </DirectoryContainer>
   )
 }
 

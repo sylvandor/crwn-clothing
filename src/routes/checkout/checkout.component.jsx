@@ -3,7 +3,7 @@ import {CartContext} from "../../contexts/cart/cart.context";
 import {CategoriesContext} from "../../contexts/products/categoriesContext";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
-import './checkout.styles.scss'
+import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from "./checkout.styles";
 
 const Checkout = () => {
   const {products} = useContext(CartContext);
@@ -14,22 +14,22 @@ const Checkout = () => {
       total + getProduct(category, id).price * count, 0);
 
   return (
-    <div className={'checkout-container'}>
-      <div className={'checkout-header'}>
-        <div className={'header-block'}><span>Product</span></div>
-        <div className={'header-block'}><span>Description</span></div>
-        <div className={'header-block'}><span>Quantity</span></div>
-        <div className={'header-block'}><span>Price</span></div>
-        <div className={'header-block'}><span>Remove</span></div>
-      </div>
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <HeaderBlock><span>Product</span></HeaderBlock>
+        <HeaderBlock><span>Description</span></HeaderBlock>
+        <HeaderBlock><span>Quantity</span></HeaderBlock>
+        <HeaderBlock><span>Price</span></HeaderBlock>
+        <HeaderBlock><span>Remove</span></HeaderBlock>
+      </CheckoutHeader>
       {
         Object.entries(products)
           .map(([id, {category, count}]) =>
             <CheckoutItem key={id} product={getProduct(category, id)} id={id} category={category} count={count}/>
           )
       }
-      <div className={'total'}>{`TOTAL: $${totalCost}`}</div>
-    </div>
+      <Total>{`TOTAL: $${totalCost}`}</Total>
+    </CheckoutContainer>
   )
 }
 export default Checkout;

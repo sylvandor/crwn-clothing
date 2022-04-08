@@ -3,6 +3,8 @@ import {CategoriesContext} from "../../contexts/products/categoriesContext";
 import ProductCard from "../product-card/product-card.component";
 import {useParams} from "react-router-dom";
 
+import {ProductsContainer} from "./category-page.styles";
+
 const getCategory = ({categories}, categoryTitle) => categories[categoryTitle];
 
 const CategoryPage = () => {
@@ -10,10 +12,10 @@ const CategoryPage = () => {
   const category = getCategory(useContext(CategoriesContext), categoryTitle)
 
   return (
-    <div className={'products-container'}>
+    <ProductsContainer>
       {category && Object.entries(category).map(([id, product]) =>
         <ProductCard key={id} product={product} categoryTitle={categoryTitle}/>)}
-    </div>
+    </ProductsContainer>
   );
 }
 

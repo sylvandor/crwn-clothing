@@ -1,4 +1,10 @@
-.product-card-container {
+import styled from "styled-components";
+
+export const Footer = styled.div``
+export const Name = styled.span``
+export const Price = styled.span``
+
+export const ProductCardContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -32,20 +38,20 @@
     }
   }
 
-  .footer {
+  ${Footer} {
     width: 100%;
     height: 5%;
     display: flex;
     justify-content: space-between;
     font-size: 18px;
 
-    .name {
+    ${Name} {
       width: 90%;
       margin-bottom: 15px;
     }
 
-    .price {
+    ${Price} {
       width: 10%;
     }
   }
-}
+`

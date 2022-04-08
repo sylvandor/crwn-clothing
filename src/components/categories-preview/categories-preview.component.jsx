@@ -6,7 +6,7 @@ const CategoriesPreview = () => {
   const {categories} = useContext(CategoriesContext);
 
   return (
-    <div className={'categories-container'}>
+    <div>
       {
         Object.entries(categories)
           .map(([title, products]) =>

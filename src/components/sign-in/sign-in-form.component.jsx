@@ -1,13 +1,9 @@
 import {useState} from "react";
-import {
-  createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup
-} from "../../utils/firebase/firebase.utils";
+import {signInAuthUserWithEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/button/button.component";
 
-import './sign-in-form.styles.scss'
+import {ButtonGroup} from "./sign-in-form.styles";
 
 const defaultFormFields = {
   email: '',
@@ -56,7 +52,7 @@ const SignInForm = () => {
         name: 'password',
         value: password
       }}/>
-      <div className={'button-group'}>
+      <ButtonGroup>
         <Button buttonProps={{type: 'submit'}}>Sign In</Button>
         <Button
           buttonType={'google'}
@@ -66,7 +62,7 @@ const SignInForm = () => {
 
           }}>Sign In With Google</Button>
 
-      </div>
+      </ButtonGroup>
     </form>
   )
 }
