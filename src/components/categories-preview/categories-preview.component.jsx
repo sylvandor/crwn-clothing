@@ -1,9 +1,9 @@
-import {useContext} from "react";
-import {CategoriesContext} from "../../contexts/products/categoriesContext";
+import {useSelector} from "react-redux";
 import CategoryPreview from "../category-preview/category-preview.component";
+import {selectCategories} from "../../store/categories/categories.selectors";
 
 const CategoriesPreview = () => {
-  const {categories} = useContext(CategoriesContext);
+  const categories = useSelector(selectCategories);
 
   return (
     <div>

@@ -1,13 +1,15 @@
-import {useContext} from "react";
-import {CartContext} from "../../contexts/cart/cart.context";
-import {CategoriesContext} from "../../contexts/products/categoriesContext";
+import {useSelector} from "react-redux";
+
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+
+import {selectGetProduct} from "../../store/categories/categories.selectors";
+import {selectProducts} from "../../store/cart/cart.selectors";
 
 import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from "./checkout.styles";
 
 const Checkout = () => {
-  const {products} = useContext(CartContext);
-  const {getProduct} = useContext(CategoriesContext);
+  const products = useSelector(selectProducts);
+  const getProduct = useSelector(selectGetProduct);
 
   const totalCost = Object.entries(products)
     .reduce((total, [id, {count, category}]) =>

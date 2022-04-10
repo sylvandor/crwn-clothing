@@ -1,6 +1,6 @@
-import {useContext} from "react";
+import {useSelector} from "react-redux";
+import {selectCategories} from "../../store/categories/categories.selectors";
 import CategoryItem from "../category-item/category-item.component";
-import {CategoriesContext} from "../../contexts/products/categoriesContext";
 
 import {DirectoryContainer} from "./directory.styles";
 
@@ -14,7 +14,7 @@ const CATEGORIES =
   }
 
 const Directory = () => {
-  const {categories} = useContext(CategoriesContext);
+  const categories = useSelector(selectCategories);
 
   return (
     <DirectoryContainer>

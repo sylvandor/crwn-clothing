@@ -1,15 +1,20 @@
-import Button from "../button/button.component";
-import React, {useContext} from "react";
-import {CartContext} from "../../contexts/cart/cart.context";
-import {CategoriesContext} from "../../contexts/products/categoriesContext";
-import CartItem from "../cart-item/cart-item.component";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+
+import Button from "../button/button.component";
+import CartItem from "../cart-item/cart-item.component";
+
+import {selectGetProduct} from "../../store/categories/categories.selectors";
+import {selectProducts} from "../../store/cart/cart.selectors";
+import {closeCart} from "../../store/cart/cart.actions";
 
 import {CartDropdownContainer, CartItems, EmptyMessage} from "./cart-dropdown.styles";
 
 const CartDropdown = () => {
-  const {products, closeCart} = useContext(CartContext)
-  const {getProduct} = useContext(CategoriesContext);
+  const dispatch = useDispatch();
+  const products = useSelector(selectProducts);
+  const getProduct = useSelector(selectGetProduct);
 
   return (
     <CartDropdownContainer>
@@ -23,7 +28,7 @@ const CartDropdown = () => {
               )
         }
       </CartItems>
-      <Link to={'/checkout'}><Button buttonProps={{onClick: closeCart}}>CHECKOUT</Button></Link>
+      <Link to={'/checkout'}><Button buttonProps={{onClick: () => dispatch(closeCart)}}>CHECKOUT</Button></Link>
     </CartDropdownContainer>
   );
 }
