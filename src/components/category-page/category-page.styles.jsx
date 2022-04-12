@@ -6,3 +6,9 @@ export const ProductsContainer = styled.div`
   column-gap: 10px;
   row-gap: 50px;
 `
+
+export const Title = styled.div`
+  font-size: 28px;
+  margin-bottom: 25px;
+  cursor: pointer;
+`
