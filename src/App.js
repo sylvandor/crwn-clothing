@@ -9,24 +9,13 @@ import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 
 import {fetchCategoriesStart} from "./store/categories/categories.actions";
-import {setCurrentUser} from "./store/user/user.actions";
-
-
-import {createUserDocumentFromAuth, onAuthStateChangedListener, signOutUser} from "./utils/firebase/firebase.utils";
+import {checkUserSession} from "./store/user/user.actions";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    signOutUser();
-
-    return onAuthStateChangedListener(user => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-
-      dispatch(setCurrentUser(user));
-    })
+    dispatch(checkUserSession());
   }, [dispatch]) // This doesn't actually need dispatch as a dependency. We only want this to run once and still works because dispatch never changes.
 
   useEffect(() => {
