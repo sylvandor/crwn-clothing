@@ -1,19 +1,15 @@
 import {useSelector} from "react-redux";
-
-import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-
-import {selectGetProduct} from "../../store/categories/categories.selectors";
-import {selectProducts} from "../../store/cart/cart.selectors";
+import PaymentForm from "../../components/payment-form/payment.form.component";
+import {selectProducts, selectTotal} from "../../store/cart/cart.selectors";
 
 import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from "./checkout.styles";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import {selectGetProduct} from "../../store/categories/categories.selectors";
 
 const Checkout = () => {
   const products = useSelector(selectProducts);
   const getProduct = useSelector(selectGetProduct);
-
-  const totalCost = Object.entries(products)
-    .reduce((total, [id, {count, category}]) =>
-      total + getProduct(category, id).price * count, 0);
+  const total = useSelector(selectTotal)
 
   return (
     <CheckoutContainer>
@@ -30,7 +26,9 @@ const Checkout = () => {
             <CheckoutItem key={id} product={getProduct(category, id)} id={id} category={category} count={count}/>
           )
       }
-      <Total>{`TOTAL: $${totalCost}`}</Total>
+      <Total>{`TOTAL: $${total}`}</Total>
+
+      <PaymentForm/>
     </CheckoutContainer>
   )
 }

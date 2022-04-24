@@ -16,7 +16,7 @@ import {
 const CheckoutItem = ({product: {name, imageUrl, price}, id, category, count}) => {
   const dispatch = useDispatch();
 
-  const add = () => dispatch(addProduct(id, category));
+  const add = () => dispatch(addProduct(id, category, price));
   const remove = () => dispatch(removeProduct(id));
   const clear = () => dispatch(clearProduct(id));
 

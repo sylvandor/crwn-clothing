@@ -8,42 +8,44 @@ const INITIAL_STATE = {
 
 const productCount = products => Object.values(products).reduce((total, item) => total + item.count, 0)
 
-const addProduct = (state, category, id) => {
-  const count = state.products[id] ? state.products[id].count + 1 : 1;
-  const products = {...state.products, [id]: {count, category}}
-  return {...state, products, productCount: productCount(products)}
+const addProduct = (cart, {category, id, price}) => {
+  const count = cart.products[id] ? cart.products[id].count + 1 : 1;
+  const products = {...cart.products, [id]: {count, category, price}}
+  return {...cart, products, productCount: productCount(products)}
 }
 
-const clearProduct = (state, idToRemove) => {
-  const products = Object.fromEntries(Object.entries(state.products).filter(([id]) => id !== idToRemove));
-  return {...state, products, productCount: productCount(products)}
+const clearProduct = (cart, idToRemove) => {
+  const products = Object.fromEntries(Object.entries(cart.products).filter(([id]) => id !== idToRemove));
+  return {...cart, products, productCount: productCount(products)}
 }
 
-const removeProduct = (state, id) => {
-  const count = state.products[id] ? state.products[id].count - 1 : 0;
+const removeProduct = (cart, id) => {
+  const count = cart.products[id] ? cart.products[id].count - 1 : 0;
 
   if (count > 0) {
-    const products = {...state.products, [id]: {...state.products[id], count}};
-    return {...state, products, productCount: productCount(products)};
+    const products = {...cart.products, [id]: {...cart.products[id], count}};
+    return {...cart, products, productCount: productCount(products)};
   } else {
-    return clearProduct(state, id);
+    return clearProduct(cart, id);
   }
 }
 
-const cartReducer = (state = INITIAL_STATE, {type, payload}) => {
+const cartReducer = (cart = INITIAL_STATE, {type, payload}) => {
   switch (type) {
     case CART_ACTIONS.toggleOpen:
-      return {...state, open: !state.open};
+      return {...cart, open: !cart.open};
     case CART_ACTIONS.closeCart:
-      return {...state, open: false};
+      return {...cart, open: false};
     case CART_ACTIONS.addProduct:
-      return addProduct(state, payload.category, payload.id);
+      return addProduct(cart, payload);
     case CART_ACTIONS.clearProduct:
-      return clearProduct(state, payload)
+      return clearProduct(cart, payload)
     case CART_ACTIONS.removeProduct:
-      return removeProduct(state, payload)
+      return removeProduct(cart, payload)
+    case CART_ACTIONS.clearCart:
+      return INITIAL_STATE;
     default:
-      return state;
+      return cart;
   }
 }
 

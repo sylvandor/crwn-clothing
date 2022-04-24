@@ -3,5 +3,6 @@ export const CART_ACTIONS = {
   closeCart: 'CLOSE_CART',
   addProduct: 'ADD_PRODUCT',
   clearProduct: 'CLEAR_PRODUCT',
-  removeProduct: 'REMOVE_PRODUCTS'
+  removeProduct: 'REMOVE_PRODUCTS',
+  clearCart: 'CLEAR_CART'
 }

@@ -9,7 +9,7 @@ import {Footer, Name, Price, ProductCardContainer} from "./product-card.styles";
 const ProductCard = ({product: {id, name, imageUrl, price}, categoryTitle}) => {
   const dispatch = useDispatch();
 
-  const addItem = () => dispatch(addProduct(id, categoryTitle));
+  const addItem = () => dispatch(addProduct(id, categoryTitle, price));
 
   return (
     <ProductCardContainer>
