@@ -1,8 +1,8 @@
-export const selectOpen = state => state.cart.open;
-export const selectProductCount = state => state.cart.productCount;
-export const selectProducts = state => state.cart.products;
+export const selectOpen = ({cart}) => cart.open;
+export const selectItemCount = ({cart}) => cart.itemCount;
+export const selectCartItems = ({cart}) => cart.items;
 
 export const selectTotal = ({cart}) =>
-  Object.entries(cart.products)
+  Object.entries(cart.items)
     .reduce((total, [_, {count, price}]) =>
       total + price * count, 0);

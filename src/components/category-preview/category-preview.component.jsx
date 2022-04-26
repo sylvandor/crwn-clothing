@@ -13,7 +13,7 @@ const CategoryPreview = ({categoryTitle, products}) =>
     <Preview>
       {products
         .slice(0, 4)
-        .map(product => <ProductCard key={product.id} product={product} categoryTitle={categoryTitle}/>)
+        .map(product => <ProductCard key={product.id} product={product} category={categoryTitle}/>)
       }
     </Preview>
   </CategoryPreviewContainer>

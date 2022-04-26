@@ -1,13 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
 
 import {toggleOpen} from "../../store/cart/cart.actions";
-import {selectProductCount} from "../../store/cart/cart.selectors";
+import {selectItemCount} from "../../store/cart/cart.selectors";
 
 import {CartIconContainer, ItemCount, ShoppingIcon} from "./cart-icon.styles";
 
 const CartIcon = () => {
   const dispatch = useDispatch();
-  const productCount = useSelector(selectProductCount);
+  const productCount = useSelector(selectItemCount);
 
   return (
     <CartIconContainer onClick={() => dispatch(toggleOpen)}>

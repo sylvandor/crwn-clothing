@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 
-import {addProduct, clearProduct, removeProduct} from "../../store/cart/cart.actions";
+import {addItem, clearItem, removeItem} from "../../store/cart/cart.actions";
 
 import {
   Arrow,
@@ -13,12 +13,14 @@ import {
   RemoveButton
 } from "./checkout-item.styles";
 
-const CheckoutItem = ({product: {name, imageUrl, price}, id, category, count}) => {
+const CheckoutItem = ({cartItem}) => {
   const dispatch = useDispatch();
+  const {imageUrl, name, price, id, count, category} = cartItem;
 
-  const add = () => dispatch(addProduct(id, category, price));
-  const remove = () => dispatch(removeProduct(id));
-  const clear = () => dispatch(clearProduct(id));
+
+  const add = () => dispatch(addItem({...cartItem, category}));
+  const remove = () => dispatch(removeItem(id));
+  const clear = () => dispatch(clearItem(id));
 
   return (
     <CheckoutItemContainer>

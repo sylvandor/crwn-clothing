@@ -2,14 +2,15 @@ import {useDispatch} from "react-redux";
 
 import Button from "../button/button.component";
 
-import {addProduct} from "../../store/cart/cart.actions";
+import {addItem} from "../../store/cart/cart.actions";
 
 import {Footer, Name, Price, ProductCardContainer} from "./product-card.styles";
 
-const ProductCard = ({product: {id, name, imageUrl, price}, categoryTitle}) => {
+const ProductCard = ({product, category}) => {
   const dispatch = useDispatch();
+  const {name, imageUrl, price} = product;
 
-  const addItem = () => dispatch(addProduct(id, categoryTitle, price));
+  const handleAddItem = () => dispatch(addItem({...product, category}));
 
   return (
     <ProductCardContainer>
@@ -18,7 +19,7 @@ const ProductCard = ({product: {id, name, imageUrl, price}, categoryTitle}) => {
         <Name>{name}</Name>
         <Price>{price}</Price>
       </Footer>
-      <Button buttonType={'inverted'} buttonProps={{onClick: addItem}}>Add to Cart</Button>
+      <Button buttonType={'inverted'} buttonProps={{onClick: handleAddItem}}>Add to Cart</Button>
     </ProductCardContainer>
   )
 }

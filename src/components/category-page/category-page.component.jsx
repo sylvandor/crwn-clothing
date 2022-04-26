@@ -21,7 +21,7 @@ const CategoryPage = () => {
         <Spinner/> :
         <ProductsContainer>
           {category && Object.entries(category).map(([id, product]) =>
-            <ProductCard key={id} product={product} categoryTitle={categoryTitle}/>)}
+            <ProductCard key={id} product={product} cateogry={categoryTitle}/>)}
         </ProductsContainer>
     }
   </>;
