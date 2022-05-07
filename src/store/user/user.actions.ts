@@ -1,3 +1,5 @@
+import {User} from 'firebase/auth';
+
 import {USER_ACTIONS, UserData} from "./user.types";
 import {Action, ActionWithPayload, createAction, withMatcher} from "../../utils/reducer/reducer.utils";
 
@@ -13,12 +15,12 @@ type GoogleSignInStart = Action<USER_ACTIONS.googleSignInStart>;
 export const googleSignInStart = withMatcher((): GoogleSignInStart =>
   createAction(USER_ACTIONS.googleSignInStart));
 
-type EmailSignInStart = ActionWithPayload<USER_ACTIONS.emailSignInStart, { email: string, password: string }>;
+export type EmailSignInStart = ActionWithPayload<USER_ACTIONS.emailSignInStart, { email: string, password: string }>;
 export const emailSignInStart = withMatcher((email: string, password: string): EmailSignInStart =>
   createAction(USER_ACTIONS.emailSignInStart, {email, password}));
 
 type SignInSuccess = ActionWithPayload<USER_ACTIONS.signInSuccess, UserData>;
-export const signInSuccess = withMatcher((user: UserData): SignInSuccess =>
+export const signInSuccess = withMatcher((user: UserData & { id: string }): SignInSuccess =>
   createAction(USER_ACTIONS.signInSuccess, user));
 
 type SignInFailed = ActionWithPayload<USER_ACTIONS.signInFailed, Error>;
@@ -37,12 +39,12 @@ type SignOutSuccess = Action<USER_ACTIONS.signOutSuccess>;
 export const signOutSuccess = withMatcher((): SignOutSuccess =>
   createAction(USER_ACTIONS.signOutSuccess));
 
-type SignUpStart = ActionWithPayload<USER_ACTIONS.signUpStart, { email: string, password: string, displayName: string }>;
+export type SignUpStart = ActionWithPayload<USER_ACTIONS.signUpStart, { email: string, password: string, displayName: string }>;
 export const signUpStart = withMatcher((email: string, password: string, displayName: string): SignUpStart =>
   createAction(USER_ACTIONS.signUpStart, {email, password, displayName}));
 
-type SignUpSuccess = ActionWithPayload<USER_ACTIONS.signUpSuccess, { user: UserData, additionalDetails: object }>;
-export const signUpSuccess = withMatcher((user: UserData, additionalDetails: object): SignUpSuccess =>
+export type SignUpSuccess = ActionWithPayload<USER_ACTIONS.signUpSuccess, { user: User, additionalDetails: object }>;
+export const signUpSuccess = withMatcher((user: User, additionalDetails: object): SignUpSuccess =>
   createAction(USER_ACTIONS.signUpSuccess, {user, additionalDetails}));
 
 type SignUpFailed = ActionWithPayload<USER_ACTIONS.signUpFailed, Error>;
