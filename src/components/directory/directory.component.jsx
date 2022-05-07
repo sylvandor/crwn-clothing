@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {selectCategories} from "../../store/categories/categories.selectors";
+import {selectCategoriesMap} from "../../store/categories/categories.selectors";
 import CategoryItem from "../category-item/category-item.component";
 
 import {DirectoryContainer} from "./directory.styles";
@@ -14,7 +14,7 @@ const CATEGORIES =
   }
 
 const Directory = () => {
-  const categories = useSelector(selectCategories);
+  const categories = useSelector(selectCategoriesMap);
 
   return (
     <DirectoryContainer>

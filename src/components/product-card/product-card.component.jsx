@@ -6,11 +6,11 @@ import {addItem} from "../../store/cart/cart.actions";
 
 import {Footer, Name, Price, ProductCardContainer} from "./product-card.styles";
 
-const ProductCard = ({product, category}) => {
+const ProductCard = ({product}) => {
   const dispatch = useDispatch();
   const {name, imageUrl, price} = product;
 
-  const handleAddItem = () => dispatch(addItem({...product, category}));
+  const handleAddItem = () => dispatch(addItem(product));
 
   return (
     <ProductCardContainer>

@@ -34,8 +34,6 @@ const PaymentForm = () => {
       }).then(res => res.json())
       const {paymentIntent: {client_secret}} = response
 
-      console.log(client_secret)
-
       setIsProcessingPayment(false);
 
       const paymentResult = await stripe.confirmCardPayment(client_secret, {
@@ -48,15 +46,13 @@ const PaymentForm = () => {
       });
 
       if (paymentResult.error) {
-        alert(paymentResult.error)
-      } else {
-        if (paymentResult.paymentIntent.status === 'succeeded') {
-          alert('Payment Success')
-          dispatch(clearCart)
-        }
+        console.error(paymentResult.error)
+      } else if (paymentResult.paymentIntent.status === 'succeeded') {
+        console.log('Payment Success')
+        dispatch(clearCart())
       }
     } catch (error) {
-      alert(error)
+      console.error(error)
       setIsProcessingPayment(false);
     }
   }

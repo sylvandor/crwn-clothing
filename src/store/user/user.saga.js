@@ -73,27 +73,27 @@ export function* signInAfterSignup({payload: {user, additionalDetails}}) {
 }
 
 export function* onUserSignOutStart() {
-  yield takeLatest(USER_ACTIONS.SIGN_OUT_START, signOut)
+  yield takeLatest(USER_ACTIONS.signOutStart, signOut)
 }
 
 export function* onEmailSignInStart() {
-  yield takeLatest(USER_ACTIONS.EMAIL_SIGN_IN_START, signInWithEmail)
+  yield takeLatest(USER_ACTIONS.emailSignInStart, signInWithEmail)
 }
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(USER_ACTIONS.GOOGLE_SIGN_IN_START, signInWithGoogle)
+  yield takeLatest(USER_ACTIONS.googleSignInStart, signInWithGoogle)
 }
 
 export function* onCheckUserSession() {
-  yield takeLatest(USER_ACTIONS.CHECK_USER_SESSION, isUserAuthenticated)
+  yield takeLatest(USER_ACTIONS.checkUserSession, isUserAuthenticated)
 }
 
 export function* onSignUpSuccess() {
-  yield takeLatest(USER_ACTIONS.SIGN_UP_SUCCESS, signInAfterSignup)
+  yield takeLatest(USER_ACTIONS.signUpSuccess, signInAfterSignup)
 }
 
 export function* onSignUpStart() {
-  yield takeLatest(USER_ACTIONS.SIGN_UP_START, signUp)
+  yield takeLatest(USER_ACTIONS.signUpStart, signUp)
 }
 
 export function* userSaga() {

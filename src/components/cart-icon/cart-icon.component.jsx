@@ -10,7 +10,7 @@ const CartIcon = () => {
   const productCount = useSelector(selectItemCount);
 
   return (
-    <CartIconContainer onClick={() => dispatch(toggleOpen)}>
+    <CartIconContainer onClick={() => dispatch(toggleOpen())}>
       <ShoppingIcon className={'shopping-icon'}/>
       <ItemCount className={'item-count'}>{productCount}</ItemCount>
     </CartIconContainer>
