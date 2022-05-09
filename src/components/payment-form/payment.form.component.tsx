@@ -1,12 +1,16 @@
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js'
+import {StripeCardElement} from "@stripe/stripe-js";
 
 import {clearCart} from "../../store/cart/cart.actions";
 import {selectTotal} from "../../store/cart/cart.selectors";
 import {selectCurrentUser} from "../../store/user/user.selectors";
 
 import {FormContainer, PaymentButton, PaymentFormContainer} from "./payment.form.styles";
+import {BUTTON_TYPES} from "../button/button.component";
+
+const ifValidCardElement = (card: StripeCardElement | null): card is StripeCardElement => card !== null;
 
 const PaymentForm = () => {
   const dispatch = useDispatch();
@@ -16,7 +20,7 @@ const PaymentForm = () => {
   const currentUser = useSelector(selectCurrentUser)
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
-  const paymentHandler = async (event) => {
+  const paymentHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!stripe || !elements) {
       return;
@@ -36,9 +40,12 @@ const PaymentForm = () => {
 
       setIsProcessingPayment(false);
 
+      const cardDetails = elements.getElement(CardElement);
+      if(!ifValidCardElement(cardDetails)) return;
+
       const paymentResult = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
-          card: elements.getElement(CardElement),
+          card: cardDetails,
           billing_details: {
             name: currentUser ? currentUser.displayName : 'Guest'
           }
@@ -61,7 +68,7 @@ const PaymentForm = () => {
     <FormContainer onSubmit={paymentHandler}>
       <h2>Credit Card Payment: </h2>
       <CardElement/>
-      <PaymentButton isLoading={isProcessingPayment} buttonType={'inverted'}>Pay Now</PaymentButton>
+      <PaymentButton isLoading={isProcessingPayment} buttonType={BUTTON_TYPES.inverted}>Pay Now</PaymentButton>
     </FormContainer>
   </PaymentFormContainer>
 }

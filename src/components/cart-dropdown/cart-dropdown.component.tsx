@@ -23,7 +23,7 @@ const CartDropdown = () => {
               .map(([id, cartItem]) => <CartItem key={id} cartItem={cartItem}/>)
         }
       </CartItems>
-      <Link to={'/checkout'}><Button buttonProps={{onClick: () => dispatch(closeCart())}}>CHECKOUT</Button></Link>
+      <Link to={'/checkout'}><Button onClick={() => dispatch(closeCart())}>CHECKOUT</Button></Link>
     </CartDropdownContainer>
   );
 }

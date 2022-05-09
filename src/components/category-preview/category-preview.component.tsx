@@ -1,11 +1,18 @@
-import ProductCard from "../product-card/product-card.component";
+import {FC} from "react";
+import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {CategoryPreviewContainer, Preview, Title} from "./category-preview.styles";
-import {useSelector} from "react-redux";
+import ProductCard from "../product-card/product-card.component";
+
 import {selectCategoryItems} from "../../store/categories/categories.selectors";
 
-const CategoryPreview = ({category}) => {
+import {CategoryPreviewContainer, Preview, Title} from "./category-preview.styles";
+
+type CategoryPreviewProps = {
+  category: string;
+}
+
+const CategoryPreview: FC<CategoryPreviewProps> = ({category}) => {
   const items = useSelector(selectCategoryItems(category));
 
   return <CategoryPreviewContainer>
@@ -17,8 +24,8 @@ const CategoryPreview = ({category}) => {
     <Preview>
       {Object.entries(items)
         .slice(0, 4)
-        .map(([id, product]) =>
-          <ProductCard key={id} product={product}/>)
+        .map(([id, categoryItem]) =>
+          <ProductCard key={id} categoryItem={categoryItem}/>)
       }
     </Preview>
   </CategoryPreviewContainer>

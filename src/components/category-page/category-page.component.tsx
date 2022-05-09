@@ -7,8 +7,12 @@ import Spinner from "../spinner/spinner.component";
 
 import {ProductsContainer, Title} from "./category-page.styles";
 
+type CategoryRouteParams = {
+  categoryTitle: string
+}
+
 const CategoryPage = () => {
-  const {categoryTitle} = useParams();
+  const {categoryTitle} = useParams<keyof CategoryRouteParams>() as CategoryRouteParams;
   const items = useSelector(selectCategoryItems(categoryTitle));
   const isLoading = useSelector(selectCategoriesIsLoading);
 
@@ -18,7 +22,10 @@ const CategoryPage = () => {
       isLoading ?
         <Spinner/> :
         <ProductsContainer>
-          {items && Object.entries(items).map(([id, product]) => <ProductCard key={id} product={product} />)}
+          {items &&
+            Object.entries(items).map(([id, categoryItem]) =>
+              <ProductCard key={id} categoryItem={categoryItem}/>
+            )}
         </ProductsContainer>
     }
   </>;

@@ -1,4 +1,6 @@
-.form-container {
+import styled from "styled-components";
+
+export const FormContainer = styled.div`
   margin: 48px auto;
 
   display: flex;
@@ -6,4 +8,4 @@
   gap: 48px;
 
   justify-content: center;
-}
+`

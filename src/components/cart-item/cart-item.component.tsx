@@ -1,6 +1,14 @@
+import {FC} from "react";
+
+import {CartItem} from "../../store/cart/cart.types";
+
 import {CartItemContainer, ItemDetails, Name} from "./cart-item.styles";
 
-const CartItem = ({cartItem: {name, imageUrl, price, count}}) =>
+type CartItemProps = {
+  cartItem: CartItem;
+};
+
+const CartItemComponent: FC<CartItemProps> = ({cartItem: {name, imageUrl, price, count}}) =>
   <CartItemContainer>
     <img src={imageUrl} alt={name}/>
     <ItemDetails>
@@ -11,4 +19,4 @@ const CartItem = ({cartItem: {name, imageUrl, price, count}}) =>
     </ItemDetails>
   </CartItemContainer>
 
-export default CartItem;
+export default CartItemComponent;

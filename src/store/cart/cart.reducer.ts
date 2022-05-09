@@ -26,12 +26,12 @@ const addItemReducer = (cart: CartState, item: CategoryItem): CartState => {
   return {...cart, items, itemCount: itemCount(items)}
 }
 
-const clearItemReducer = (cart: CartState, idToRemove: string): CartState => {
-  const items = Object.fromEntries(Object.entries(cart.items).filter(([id]) => Number(id) !== Number(idToRemove)));
+const clearItemReducer = (cart: CartState, idToRemove: number): CartState => {
+  const items = Object.fromEntries(Object.entries(cart.items).filter(([id]) => Number(id) !== idToRemove));
   return {...cart, items, itemCount: itemCount(items)}
 }
 
-const removeItemReducer = (cart: CartState, id: string): CartState => {
+const removeItemReducer = (cart: CartState, id: number): CartState => {
   const count = cart.items[id] ? cart.items[id].count - 1 : 0;
 
   if (count > 0) {

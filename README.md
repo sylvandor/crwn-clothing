@@ -15,6 +15,6 @@ Latest Version deployed on Netlify:
 - Middleware
 - Redux-Thunk
 - Redux-Saga
-- Netlify Deployment
+- Netlify Deployment [Hosting, Serverless Functions]
 - Stripe Integration
-- Netlify Serverless Functions
+- Typescript [Third Party Integrations, Redux, Sagas]

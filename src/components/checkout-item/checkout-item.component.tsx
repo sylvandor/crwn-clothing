@@ -12,13 +12,19 @@ import {
   Quantity,
   RemoveButton
 } from "./checkout-item.styles";
+import {CartItem} from "../../store/cart/cart.types";
+import {FC} from "react";
 
-const CheckoutItem = ({cartItem}) => {
+type CheckoutItemProps = {
+  cartItem: CartItem
+}
+
+const CheckoutItem: FC<CheckoutItemProps> = ({cartItem}) => {
   const dispatch = useDispatch();
-  const {imageUrl, name, price, id, count, category} = cartItem;
+  const {imageUrl, name, price, id, count} = cartItem;
 
 
-  const add = () => dispatch(addItem({...cartItem, category}));
+  const add = () => dispatch(addItem({...cartItem}));
   const remove = () => dispatch(removeItem(id));
   const clear = () => dispatch(clearItem(id));
 

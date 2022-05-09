@@ -11,15 +11,15 @@ export const closeCart = withMatcher((): CloseCart =>
   createAction(CART_ACTIONS.closeCart));
 
 type AddItem = ActionWithPayload<CART_ACTIONS.addItem, CategoryItem>;
-export const addItem = withMatcher((product: CategoryItem): AddItem =>
-  createAction(CART_ACTIONS.addItem, product));
+export const addItem = withMatcher((categoryItem: CategoryItem): AddItem =>
+  createAction(CART_ACTIONS.addItem, categoryItem));
 
-type ClearItem = ActionWithPayload<CART_ACTIONS.clearItem, string>;
-export const clearItem = withMatcher((id: string): ClearItem =>
+type ClearItem = ActionWithPayload<CART_ACTIONS.clearItem, number>;
+export const clearItem = withMatcher((id: number): ClearItem =>
   createAction(CART_ACTIONS.clearItem, id));
 
-type RemoveItem = ActionWithPayload<CART_ACTIONS.removeItem, string>;
-export const removeItem = withMatcher((id: string): RemoveItem =>
+type RemoveItem = ActionWithPayload<CART_ACTIONS.removeItem, number>;
+export const removeItem = withMatcher((id: number): RemoveItem =>
   createAction(CART_ACTIONS.removeItem, id));
 
 type ClearCart = Action<CART_ACTIONS.clearCart>;
