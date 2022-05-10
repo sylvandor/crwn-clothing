@@ -18,3 +18,4 @@ Latest Version deployed on Netlify:
 - Netlify Deployment [Hosting, Serverless Functions]
 - Stripe Integration
 - Typescript [Third Party Integrations, Redux, Sagas]
+- Optimizations [useMemo, useCallback, React Memo, Dynamic Component Rendering]
